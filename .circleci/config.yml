@@ -48,6 +48,9 @@ jobs:
       - checkout
       - restore_yarn
       - run:
+          name: Create .env
+          command: echo "SKIP_PREFLIGHT_CHECK=true" > .env
+      - run:
           name: Run build
           command: yarn build
       - persist_to_workspace:
