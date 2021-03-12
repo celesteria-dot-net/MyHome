@@ -3,20 +3,20 @@ executors:
   default:
     working_directory: ~/repo
     docker:
-      - image: circleci/node:14.15.5
+      - image: circleci/node:12.13.1
 
 commands:
   restore_yarn:
     steps:
       - restore_cache:
           name: Restore yarn dependencies
-          key: yarn-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarn-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
   save_yarn:
     steps:
       - save_cache:
           name: Cache yarn dependencies
-          key: yarn-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarn-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules/
 
@@ -41,6 +41,29 @@ jobs:
       - run:
           command: yarn fix
 
+  build_and_deploy:
+    parameters:
+      env:
+        type: enum
+        enum: ["dev", "prod"]
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_yarn
+      - run:
+          name: Run build
+          command: yarn build
+      - run:
+          name: Change the location of npm-global-install
+          command: npm config set prefix '$HOME/.npm-global/'
+      - run:
+          name: Install firebase-tools
+          command: npm install -g firebase-tools
+      - run:
+          name: Run deploy
+          command: firebase deploy --only hosting --project << parameters.env >> --token ${FIREBASE_TOKEN}
+
 workflows:
   version: 2
   format_and_lint:
@@ -49,3 +72,21 @@ workflows:
       - format_and_lint:
           requires:
             - setup
+      - build_and_deploy:
+          name: deploy_dev
+          env: dev
+          context: FIREBASE
+          requires:
+            - format_and_lint
+          filters:
+            branches:
+              only: develop
+      - build_and_deploy:
+          name: deploy_prod
+          env: prod
+          context: FIREBASE
+          requires:
+            - format_and_lint
+          filters:
+            branches:
+              only: main
