@@ -10,13 +10,13 @@ commands:
     steps:
       - restore_cache:
           name: Restore yarn dependencies
-          key: yarn-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarn-v3-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
   save_yarn:
     steps:
       - save_cache:
           name: Cache yarn dependencies
-          key: yarn-v2-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarn-v3-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules/
 
@@ -68,12 +68,10 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - restore_yarn
       - run:
           name: Change the location of npm-global-install
           command: npm config set prefix '$HOME/.npm-global/'
-      - run:
-          name: Install firebase-tools
-          command: npm install -g firebase-tools
       - run:
           name: Run deploy
           command: firebase deploy --only hosting --project << parameters.env >> --token ${FIREBASE_TOKEN}
