@@ -41,7 +41,19 @@ jobs:
       - run:
           command: yarn fix
 
-  build_and_deploy:
+  build:
+    steps:
+      - checkout
+      - restore_yarn
+      - run:
+          name: Run build
+          command: yarn build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+
+  deploy:
     parameters:
       env:
         type: enum
@@ -49,11 +61,8 @@ jobs:
     executor:
       name: default
     steps:
-      - checkout
-      - restore_yarn
-      - run:
-          name: Run build
-          command: yarn build
+      - attach_workspace:
+          at: .
       - run:
           name: Change the location of npm-global-install
           command: npm config set prefix '$HOME/.npm-global/'
@@ -72,21 +81,31 @@ workflows:
       - format_and_lint:
           requires:
             - setup
-      - build_and_deploy:
+      - build:
+          requires:
+            - setup
+          filters:
+            branches:
+              only:
+                - develop
+                - main
+      - deploy:
           name: deploy_dev
           env: dev
           context: FIREBASE
           requires:
             - format_and_lint
+            - build
           filters:
             branches:
               only: develop
-      - build_and_deploy:
+      - deploy:
           name: deploy_prod
           env: prod
           context: FIREBASE
           requires:
             - format_and_lint
+            - build
           filters:
             branches:
               only: main
