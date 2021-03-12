@@ -66,9 +66,10 @@ jobs:
     executor:
       name: default
     steps:
+      - checkout
+      - restore_yarn
       - attach_workspace:
           at: .
-      - restore_yarn
       - run:
           name: Change the location of npm-global-install
           command: npm config set prefix '$HOME/.npm-global/'
