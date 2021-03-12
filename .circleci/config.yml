@@ -71,9 +71,6 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Change the location of npm-global-install
-          command: npm config set prefix '$HOME/.npm-global/'
-      - run:
           name: Run deploy
           command: firebase deploy --only hosting --project << parameters.env >> --token ${FIREBASE_TOKEN}
 
