@@ -42,6 +42,8 @@ jobs:
           command: yarn fix
 
   build:
+    executor:
+      name: default
     steps:
       - checkout
       - restore_yarn
