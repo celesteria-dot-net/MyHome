@@ -12,7 +12,7 @@ import {
 } from 'semantic-ui-react';
 
 import BackToTop from 'components/atoms/BackToTopButton';
-import ListAnchor, { AnchorType } from 'components/atoms/CustomAnchor';
+import ListAnchor from 'components/atoms/CustomAnchor';
 import Jumbotron from 'components/organisms/Jumbotron';
 import Title from 'components/molecules/CustomTitle';
 import IconAnchor from 'components/atoms/IconAnchorButton';
@@ -21,14 +21,10 @@ import PageTitle from 'components/atoms/PageTitle';
 import Footer from 'components/organisms/Footer';
 
 import PageTitles from 'data/titles';
+import { favoriteVTubers, gameHistory } from 'data/introductionTableContent';
 import bgPicture from 'pictures/background.jpg';
 
-type Props = {
-  favoriteVTubers: AnchorType[];
-  gameHistory: string[];
-};
-
-const Top: FC<Props> = ({ favoriteVTubers, gameHistory }) => (
+const Top: FC = () => (
   <>
     <PageTitle title={PageTitles.Top} />
 
