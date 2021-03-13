@@ -16,6 +16,8 @@ const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
   <Card.Group>
     {posts.map((post) => {
       const cont = post.content.replace(reg, '');
+      const cutCont =
+        cont.length < 100 ? cont : cont.slice(0, 99).concat('...');
 
       return (
         <Card key={post.id} href="#">
@@ -35,13 +37,7 @@ const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
           <Card.Content>
             <Card.Header content={post.title} />
             <Card.Meta content={formatDateTime(post.publishedAt)} />
-            <Card.Description
-              content={
-                post.summary ??
-                cont.length < 100 ??
-                cont.slice(0, 99).concat('...')
-              }
-            />
+            <Card.Description content={post.summary ? post.summary : cutCont} />
           </Card.Content>
         </Card>
       );
