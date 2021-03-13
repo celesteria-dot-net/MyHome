@@ -95,6 +95,7 @@ workflows:
   version: 2
   format_and_lint:
     jobs:
+      - test_files
       # - setup
       # - format_and_lint:
       #     requires:
