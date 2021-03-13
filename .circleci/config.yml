@@ -86,7 +86,7 @@ workflows:
   version: 2
   format_and_lint:
     jobs:
-      - setup
+      - setup:
           context: TOKENS
       - format_and_lint:
           requires:
