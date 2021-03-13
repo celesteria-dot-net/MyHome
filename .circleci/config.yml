@@ -76,7 +76,7 @@ jobs:
           command: npm install --prefix=./firebase-tools firebase-tools
       - run:
           name: Deploy to Firebase
-          command: ./firebase-tools/node_modules/.bin/firebase deploy --only hosting --project << parameters.env >> --token=<< parameters.token >>
+          command: ./firebase-tools/node_modules/.bin/firebase deploy --only hosting --project << parameters.env >> --token ${FIREBASE_TOKEN}
 
 workflows:
   version: 2
