@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Route, Routes } from 'react-router';
 
-import Top from 'components/pages/Top';
+import Top from 'containers/pages/Top';
 import BlogTop from 'components/pages/BlogTop';
 
 const App: FC = () => (

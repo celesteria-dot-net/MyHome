@@ -13,20 +13,21 @@ import {
 } from 'semantic-ui-react';
 
 import BackToTop from 'components/atoms/BackToTopButton';
-import ListAnchor from 'components/atoms/CustomAnchor';
+import ListAnchor, { AnchorType } from 'components/atoms/CustomAnchor';
 import Jumbotron from 'components/organisms/Jumbotron';
 import Title from 'components/molecules/CustomTitle';
 import IconAnchor from 'components/atoms/IconAnchorButton';
 import MyIcon from 'components/atoms/MyIcon';
-import {
-  favoriteVTubers,
-  gameHistory,
-} from 'components/data/introductionTableContent';
 import Footer from '../organisms/Footer';
 
 import bgPicture from '../../pictures/background.jpg';
 
-const Top: FC = () => (
+type Props = {
+  favoriteVTubers: AnchorType[];
+  gameHistory: string[]
+}
+
+const Top: FC<Props> = ({favoriteVTubers, gameHistory}) => (
   <>
     <Helmet>
       <title>Lucky&apos;s page</title>
