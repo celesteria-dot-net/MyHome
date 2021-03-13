@@ -49,7 +49,9 @@ jobs:
       - restore_yarn
       - run:
           name: Create .env
-          command: echo 'SKIP_PREFLIGHT_CHECK=true' > .env
+          command: |
+            echo 'SKIP_PREFLIGHT_CHECK=true' > .env
+            echo 'REACT_APP_CMS_KEY=\"${MICROCMS_TOKEN}\"' >> .env
       - run:
           name: Run build
           command: yarn build
@@ -87,6 +89,7 @@ workflows:
           requires:
             - setup
       - build:
+          context: TOKENS
           requires:
             - setup
           filters:
@@ -97,7 +100,7 @@ workflows:
       - deploy:
           name: deploy_dev
           env: dev
-          context: FIREBASE
+          context: TOKENS
           requires:
             - format_and_lint
             - build
@@ -107,7 +110,7 @@ workflows:
       - deploy:
           name: deploy_prod
           env: prod
-          context: FIREBASE
+          context: TOKENS
           requires:
             - format_and_lint
             - build
