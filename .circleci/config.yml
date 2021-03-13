@@ -21,6 +21,12 @@ commands:
             - ./node_modules/
 
 jobs:
+  check_shell:
+    executor:
+      name: default
+    steps:
+      - run:
+        command: exec $SHELL -l
   setup:
     executor:
       name: default
@@ -83,35 +89,36 @@ workflows:
   version: 2
   format_and_lint:
     jobs:
-      - setup
-      - format_and_lint:
-          requires:
-            - setup
-      - build:
-          requires:
-            - setup
-          filters:
-            branches:
-              only:
-                - develop
-                - main
-      - deploy:
-          name: deploy_dev
-          env: dev
-          context: FIREBASE
-          requires:
-            - format_and_lint
-            - build
-          filters:
-            branches:
-              only: develop
-      - deploy:
-          name: deploy_prod
-          env: prod
-          context: FIREBASE
-          requires:
-            - format_and_lint
-            - build
-          filters:
-            branches:
-              only: main
+      - check_shell
+      # - setup
+      # - format_and_lint:
+      #     requires:
+      #       - setup
+      # - build:
+      #     requires:
+      #       - setup
+      #     filters:
+      #       branches:
+      #         only:
+      #           - develop
+      #           - main
+      # - deploy:
+      #     name: deploy_dev
+      #     env: dev
+      #     context: FIREBASE
+      #     requires:
+      #       - format_and_lint
+      #       - build
+      #     filters:
+      #       branches:
+      #         only: develop
+      # - deploy:
+      #     name: deploy_prod
+      #     env: prod
+      #     context: FIREBASE
+      #     requires:
+      #       - format_and_lint
+      #       - build
+      #     filters:
+      #       branches:
+      #         only: main
