@@ -1,4 +1,7 @@
 version: 2.1
+orbs:
+  firebase-deploy: azdevs/firebase-deploy@1.0.0
+
 executors:
   default:
     working_directory: ~/repo
@@ -69,15 +72,9 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run:
-          name: Change the location of npm-global-install
-          command: npm config set prefix '$HOME/.npm-global/'
-      - run:
-          name: Install firebase-tools globally
-          command: npm install -g firebase-tools
-      - run:
-          name: Run deploy
-          command: firebase deploy --only hosting --project << parameters.env >> --token ${FIREBASE_TOKEN}
+      - firebase-deploy/deploy:
+          token: $FIREBASE_TOKEN
+          alias: << parameters.env >>
 
 workflows:
   version: 2
