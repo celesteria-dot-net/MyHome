@@ -32,6 +32,11 @@ jobs:
             npm install -g firebase-tools
             cd ~/.npm-global/
             ls -l
+            cd bin
+            ls -l
+            cd ../lib
+            ls -l
+            ~/.npm-global/bin/firebase --version
 
   # setup:
   #   executor:
