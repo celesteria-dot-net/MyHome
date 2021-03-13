@@ -12,17 +12,25 @@ const reg = /<("[^"]*"|'[^']*'|[^'">])*>/g;
 
 const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
   <Card.Group>
-    {posts.map((post) => (
-      <Card key={post.id} href="#">
-        <Card.Content>
-          <Card.Header content={post.title} />
-          <Card.Meta content={formatDateTime(post.publishedAt)} />
-          <Card.Description
-            content={post.summary ?? post.content.replace(reg, '')}
-          />
-        </Card.Content>
-      </Card>
-    ))}
+    {posts.map((post) => {
+      const cont = post.content.replace(reg, '');
+
+      return (
+        <Card key={post.id} href="#">
+          <Card.Content>
+            <Card.Header content={post.title} />
+            <Card.Meta content={formatDateTime(post.publishedAt)} />
+            <Card.Description
+              content={
+                post.summary ??
+                cont.length < 100 ??
+                cont.slice(0, 99).concat('...')
+              }
+            />
+          </Card.Content>
+        </Card>
+      );
+    })}
   </Card.Group>
 );
 
