@@ -68,8 +68,9 @@ const Top: FC = () => (
                 <Table.Cell content="推しVTuber" textAlign="center" />
                 <Table.Cell>
                   <List bulleted>
-                    {favoriteVTubers.map((value) => (
-                      <ListAnchor content={value.content} url={value.url} />
+                    {favoriteVTubers.map((value, index) => (
+                      // eslint-disable-next-line react/no-array-index-key
+                      <ListAnchor key={`favoriteV-${index}`} content={value.content} url={value.url} />
                     ))}
                   </List>
                 </Table.Cell>
