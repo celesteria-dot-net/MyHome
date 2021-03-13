@@ -6,7 +6,10 @@ type StatusMessages = { [status: number]: string };
 type Prop = { statusMessages?: StatusMessages };
 type State = { hasError: boolean; error: Error | null };
 
-const DEFAULT_MESSAGES: StatusMessages = { 0: 'サーバエラーです' };
+const DEFAULT_MESSAGES: StatusMessages = {
+  0: 'サーバエラーです',
+  401: '認証エラーです',
+};
 
 /**
  * API通信などに用いるもので、kyのHTTPステータスコードに応じたエラーメッセージを表示してくれる
