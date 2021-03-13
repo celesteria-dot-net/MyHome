@@ -13,10 +13,10 @@ const BackToTop: FC = () => (
     onClick={() => window.scrollTo(0, 0)}
     css={css`
       position: fixed;
-      bottom: 30px;
       right: 30px;
-      opacity: 0.7;
+      bottom: 30px;
       z-index: 5; /* position:relativeがあった際に下になってしまうので */
+      opacity: 0.7;
     `}
   />
 );
