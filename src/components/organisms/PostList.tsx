@@ -1,5 +1,7 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { FC } from 'react';
-import { Card } from 'semantic-ui-react';
+import { Card, Icon, Image } from 'semantic-ui-react';
 
 import { Post } from 'domains/microCms';
 import { formatDateTime } from 'utils/date';
@@ -17,6 +19,19 @@ const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
 
       return (
         <Card key={post.id} href="#">
+          {post.thumbnail ? (
+            <Image src={post.thumbnail.url} size="medium" centered />
+          ) : (
+            <Icon
+              name="align left"
+              size="massive"
+              color="black"
+              css={css`
+                width: auto !important;
+                margin: 15px 0 !important;
+              `}
+            />
+          )}
           <Card.Content>
             <Card.Header content={post.title} />
             <Card.Meta content={formatDateTime(post.publishedAt)} />
