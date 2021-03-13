@@ -28,7 +28,7 @@ jobs:
       - checkout
       - run:
           command: |
-            npm config set prefix '$HOME/.npm-global/'
+            npm config set prefix '~/.npm-global/'
             npm install -g firebase-tools
             cd ~/.npm-global/
             ls -l
