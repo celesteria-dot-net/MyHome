@@ -1,7 +1,4 @@
 version: 2.1
-orbs:
-  firebase-deploy: azdevs/firebase-deploy@1.0.0
-
 executors:
   default:
     working_directory: ~/repo
@@ -72,9 +69,14 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - firebase-deploy/deploy:
-          token: $FIREBASE_TOKEN
-          alias: << parameters.env >>
+      - run:
+          run: ls -l
+      - run:
+          name: Install Firebase Tools
+          command: npm install --prefix=./firebase-tools firebase-tools
+      - run:
+          name: Deploy to Firebase
+          command: ./firebase-tools/node_modules/.bin/firebase deploy --only hosting --project << parameters.env >> --token=<< parameters.token >>
 
 workflows:
   version: 2
