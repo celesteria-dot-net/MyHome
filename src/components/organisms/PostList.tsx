@@ -17,7 +17,9 @@ const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
         <Card.Content>
           <Card.Header content={post.title} />
           <Card.Meta content={formatDateTime(post.publishedAt)} />
-          <Card.Description content={post.content.replace(reg, '')} />
+          <Card.Description
+            content={post.summary ?? post.content.replace(reg, '')}
+          />
         </Card.Content>
       </Card>
     ))}
