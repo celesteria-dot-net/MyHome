@@ -10,13 +10,13 @@ commands:
     steps:
       - restore_cache:
           name: Restore yarn dependencies
-          key: yarn-v3-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarn-v4-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
   save_yarn:
     steps:
       - save_cache:
           name: Cache yarn dependencies
-          key: yarn-v3-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarn-v4-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules/
 
@@ -67,9 +67,11 @@ jobs:
       name: default
     steps:
       - checkout
-      - restore_yarn
       - attach_workspace:
           at: .
+      - run:
+          name: Install firebase-tools globally
+          command: npm install -g firebase-tools && exec $SHELL -l
       - run:
           name: Run deploy
           command: firebase deploy --only hosting --project << parameters.env >> --token ${FIREBASE_TOKEN}
