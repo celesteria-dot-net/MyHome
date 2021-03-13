@@ -51,7 +51,7 @@ jobs:
           name: Create .env
           command: |
             echo 'SKIP_PREFLIGHT_CHECK=true' > .env
-            echo 'REACT_APP_CMS_KEY="${MICROCMS_TOKEN}"' >> .env
+            echo 'REACT_APP_CMS_KEY="'${MICROCMS_TOKEN}\" >> .env
       - run:
           name: Run build
           command: yarn build
@@ -84,7 +84,8 @@ workflows:
   version: 2
   format_and_lint:
     jobs:
-      - setup
+      - setup:
+          context: TOKENS
       - format_and_lint:
           requires:
             - setup
