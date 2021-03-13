@@ -31,8 +31,6 @@ jobs:
           name: Install dependencies
           command: yarn --check-files --frozen-lockfile --non-interactive
       - save_yarn
-      - run:
-          command: echo 'REACT_APP_CMS_KEY="'${MICROCMS_TOKEN}\"
 
   format_and_lint:
     executor:
@@ -53,7 +51,7 @@ jobs:
           name: Create .env
           command: |
             echo 'SKIP_PREFLIGHT_CHECK=true' > .env
-            echo 'REACT_APP_CMS_KEY="${MICROCMS_TOKEN}"' >> .env
+            echo 'REACT_APP_CMS_KEY="'${MICROCMS_TOKEN}\" >> .env
       - run:
           name: Run build
           command: yarn build
