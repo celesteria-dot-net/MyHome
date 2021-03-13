@@ -1,17 +1,17 @@
 import React, { FC, Suspense } from 'react';
-import { Helmet } from 'react-helmet';
 import { Container, Divider, Header } from 'semantic-ui-react';
 
 import ErrorBoundary from 'ErrorBoundary';
 import BackToTop from 'components/atoms/BackToTopButton';
-import PostList from 'containers/organisms/PostList';
 import Spinner from 'components/molecules/Loading';
+import PostList from 'containers/organisms/PostList';
+import PageTitle from 'components/atoms/PageTitle';
+
+import PageTitles from 'data/titles';
 
 const BlogTop: FC = () => (
   <>
-    <Helmet>
-      <title>投稿一覧</title>
-    </Helmet>
+    <PageTitle title={PageTitles.BlogTop} />
 
     <Container>
       <Divider hidden />

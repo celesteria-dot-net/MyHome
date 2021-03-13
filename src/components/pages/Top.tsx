@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -18,20 +17,20 @@ import Jumbotron from 'components/organisms/Jumbotron';
 import Title from 'components/molecules/CustomTitle';
 import IconAnchor from 'components/atoms/IconAnchorButton';
 import MyIcon from 'components/atoms/MyIcon';
-import Footer from '../organisms/Footer';
+import PageTitle from 'components/atoms/PageTitle';
+import Footer from 'components/organisms/Footer';
 
-import bgPicture from '../../pictures/background.jpg';
+import PageTitles from 'data/titles';
+import bgPicture from 'pictures/background.jpg';
 
 type Props = {
   favoriteVTubers: AnchorType[];
-  gameHistory: string[]
-}
+  gameHistory: string[];
+};
 
-const Top: FC<Props> = ({favoriteVTubers, gameHistory}) => (
+const Top: FC<Props> = ({ favoriteVTubers, gameHistory }) => (
   <>
-    <Helmet>
-      <title>Lucky&apos;s page</title>
-    </Helmet>
+    <PageTitle title={PageTitles.Top} />
 
     <Jumbotron backgroundImagePath={bgPicture}>
       <Segment vertical>
@@ -70,8 +69,12 @@ const Top: FC<Props> = ({favoriteVTubers, gameHistory}) => (
                 <Table.Cell>
                   <List bulleted>
                     {favoriteVTubers.map((value, index) => (
-                      // eslint-disable-next-line react/no-array-index-key
-                      <ListAnchor key={`favoriteV-${index}`} content={value.content} url={value.url} />
+                      <ListAnchor
+                        // eslint-disable-next-line react/no-array-index-key
+                        key={`favoriteV-${index}`}
+                        content={value.content}
+                        url={value.url}
+                      />
                     ))}
                   </List>
                 </Table.Cell>
