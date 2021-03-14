@@ -22,8 +22,7 @@ const BackTo: FC<Props> = ({
     aria-label={ariaLabel}
     onClick={onClick}
     css={css`
-      position: fixed;
-      z-index: 5; /* position:relativeがあった際に下になってしまうので */
+      margin-bottom: 0.5rem !important;
       opacity: 0.7;
     `}
   />
