@@ -3,8 +3,9 @@ import { Container, Divider, Header } from 'semantic-ui-react';
 
 import ErrorBoundary from 'ErrorBoundary';
 import Spinner from 'components/molecules/Loading';
-import PostList from 'containers/organisms/PostList';
 import PageTitle from 'components/atoms/PageTitle';
+import BlogPostsIcons from 'components/molecules/BlogPostsIcons';
+import PostList from 'containers/organisms/PostList';
 
 import PageTitles from 'data/titles';
 
@@ -21,6 +22,8 @@ const BlogTop: FC = () => (
         </Suspense>
       </ErrorBoundary>
     </Container>
+
+    <BlogPostsIcons />
   </>
 );
 
