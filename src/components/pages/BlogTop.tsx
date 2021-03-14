@@ -14,6 +14,7 @@ const BlogTop: FC = () => (
     <Container>
       <Divider hidden />
       <Header as="h2" content="投稿一覧" />
+      <Divider />
       <Divider hidden />
       <PostList />
     </Container>
