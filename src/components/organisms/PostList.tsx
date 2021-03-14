@@ -22,26 +22,28 @@ const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
 
       return (
         <Link to={post.id}>
-        <Card key={post.id}>
-          {post.thumbnail ? (
-            <Image src={post.thumbnail.url} size="medium" centered />
-          ) : (
-            <Icon
-              name="align left"
-              size="massive"
-              color="black"
-              css={css`
-                width: auto !important;
-                margin: 15px 0 !important;
-              `}
-            />
-          )}
-          <Card.Content>
-            <Card.Header content={post.title} />
-            <Card.Meta content={formatDateTime(post.publishedAt)} />
-            <Card.Description content={post.summary ? post.summary : cutCont} />
-          </Card.Content>
-        </Card>
+          <Card key={post.id}>
+            {post.thumbnail ? (
+              <Image src={post.thumbnail.url} size="medium" centered />
+            ) : (
+              <Icon
+                name="align left"
+                size="massive"
+                color="black"
+                css={css`
+                  width: auto !important;
+                  margin: 15px 0 !important;
+                `}
+              />
+            )}
+            <Card.Content>
+              <Card.Header content={post.title} />
+              <Card.Meta content={formatDateTime(post.publishedAt)} />
+              <Card.Description
+                content={post.summary ? post.summary : cutCont}
+              />
+            </Card.Content>
+          </Card>
         </Link>
       );
     })}

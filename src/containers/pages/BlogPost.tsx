@@ -8,8 +8,8 @@ import BlogPost from 'components/pages/BlogPost';
 
 const EnhancedBlogPost: FC = () => {
   const { postId } = useParams();
-  const { data } = useQuery(`post-${postId}`, () => fetchPost(postId))
-  if (!data) return <Message error message="" />
+  const { data } = useQuery(`post-${postId}`, () => fetchPost(postId));
+  if (!data) return <Message error message="" />;
 
   return <BlogPost post={data} />;
 };

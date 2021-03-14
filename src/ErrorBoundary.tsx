@@ -9,7 +9,7 @@ type State = { hasError: boolean; error: Error | null };
 const DEFAULT_MESSAGES: StatusMessages = {
   0: 'サーバエラーです',
   401: '認証エラーです',
-  404: '指定されたURLは無効です'
+  404: '指定されたURLは無効です',
 };
 
 /**

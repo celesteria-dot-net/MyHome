@@ -1,8 +1,8 @@
-import React, { FC, Suspense } from "react";
-import { Outlet } from "react-router";
+import React, { FC, Suspense } from 'react';
+import { Outlet } from 'react-router';
 
 import ErrorBoundary from 'ErrorBoundary';
-import Spinner from "components/molecules/Loading";
+import Spinner from 'components/molecules/Loading';
 
 const BlogPage: FC = () => (
   <ErrorBoundary>
@@ -10,6 +10,6 @@ const BlogPage: FC = () => (
       <Outlet />
     </Suspense>
   </ErrorBoundary>
-)
+);
 
 export default BlogPage;

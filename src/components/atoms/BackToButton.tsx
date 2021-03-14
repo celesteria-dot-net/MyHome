@@ -9,11 +9,7 @@ type Props = {
   onClick?: () => void;
 };
 
-const BackTo: FC<Props> = ({
-  icon,
-  ariaLabel,
-  onClick = () => undefined,
-}) => (
+const BackTo: FC<Props> = ({ icon, ariaLabel, onClick = () => undefined }) => (
   <Button
     circular
     icon={icon}
