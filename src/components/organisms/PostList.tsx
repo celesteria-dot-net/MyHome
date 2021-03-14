@@ -21,8 +21,8 @@ const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
         cont.length < 100 ? cont : cont.slice(0, 99).concat('...');
 
       return (
-        <Link to={post.id}>
-          <Card key={post.id}>
+        <Link to={post.id} key={post.id}>
+          <Card>
             {post.thumbnail ? (
               <Image src={post.thumbnail.url} size="medium" centered />
             ) : (
