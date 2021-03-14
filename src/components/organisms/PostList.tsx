@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Icon, Image } from 'semantic-ui-react';
 
 import { Post } from 'domains/microCms';
-import { formatDateTime } from 'utils/date';
-import { Link } from 'react-router-dom';
+import { formatDateOnly } from 'utils/date';
 
 /**
  * HTMLタグを取り除く正規表現
@@ -39,7 +39,7 @@ const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
             <Card.Content>
               <Card.Header content={post.title} />
               <Card.Meta
-                content={`投稿日：${formatDateTime(post.publishedAt)}`}
+                content={`投稿日：${formatDateOnly(post.publishedAt)}`}
               />
               <Card.Description
                 content={post.summary ? post.summary : cutCont}
