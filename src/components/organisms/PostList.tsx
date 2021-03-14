@@ -13,7 +13,7 @@ import { formatDateTime } from 'utils/date';
 const reg = /<("[^"]*"|'[^']*'|[^'">])*>/g;
 
 const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
-  <Card.Group>
+  <Card.Group itemsPerRow={3}>
     {posts.map((post) => {
       const cont = post.content.replace(reg, '');
       const cutCont =
