@@ -5,6 +5,7 @@ import { Card, Icon, Image } from 'semantic-ui-react';
 
 import { Post } from 'domains/microCms';
 import { formatDateTime } from 'utils/date';
+import { Link } from 'react-router-dom';
 
 /**
  * HTMLタグを取り除く正規表現
@@ -20,7 +21,8 @@ const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
         cont.length < 100 ? cont : cont.slice(0, 99).concat('...');
 
       return (
-        <Card key={post.id} href="#">
+        <Link to={post.id}>
+        <Card key={post.id}>
           {post.thumbnail ? (
             <Image src={post.thumbnail.url} size="medium" centered />
           ) : (
@@ -40,6 +42,7 @@ const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
             <Card.Description content={post.summary ? post.summary : cutCont} />
           </Card.Content>
         </Card>
+        </Link>
       );
     })}
   </Card.Group>
