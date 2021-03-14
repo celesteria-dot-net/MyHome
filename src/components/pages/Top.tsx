@@ -17,7 +17,7 @@ import Title from 'components/molecules/LargeTitle';
 import IconAnchor from 'components/atoms/IconAnchorButton';
 import MyIcon from 'components/atoms/MyIcon';
 import PageTitle from 'components/atoms/PageTitle';
-import HomeIcons from 'components/molecules/HomeIcons';
+import HomeIcons from 'components/organisms/HomeIcons';
 import Footer from 'components/organisms/Footer';
 
 import PageTitles from 'data/titles';

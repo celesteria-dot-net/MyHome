@@ -4,7 +4,7 @@ import { Container, Divider, Header } from 'semantic-ui-react';
 import ErrorBoundary from 'ErrorBoundary';
 import Spinner from 'components/molecules/Loading';
 import PageTitle from 'components/atoms/PageTitle';
-import BlogPostsIcons from 'components/molecules/BlogPostsIcons';
+import BlogPostsIcons from 'components/organisms/BlogPostsIcons';
 import PostList from 'containers/organisms/PostList';
 
 import PageTitles from 'data/titles';
