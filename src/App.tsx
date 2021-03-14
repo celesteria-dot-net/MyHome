@@ -5,6 +5,7 @@ import Top from 'components/pages/Top';
 import BlogTop from 'components/pages/BlogTop';
 import Blog from 'components/templates/Blog';
 import BlogPost from 'containers/pages/BlogPost';
+import NotFound from 'components/pages/404';
 
 const App: FC = () => (
   <Routes>
@@ -13,7 +14,8 @@ const App: FC = () => (
       <Route path="/" element={<BlogTop />} />
       <Route path=":postId" element={<BlogPost />} />
     </Route>
-    <Route path="*" element={<Navigate to="/" replace />} />;
+    <Route path="404" element={<NotFound />} />
+    <Route path="*" element={<Navigate to="404" replace />} />;
   </Routes>
 );
 
