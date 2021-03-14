@@ -17,7 +17,7 @@ const BackTo: FC<Props> = ({
   <Button
     circular
     icon={icon}
-    size="huge"
+    size="big"
     color="grey"
     aria-label={ariaLabel}
     onClick={onClick}
