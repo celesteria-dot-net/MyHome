@@ -38,7 +38,9 @@ const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
             )}
             <Card.Content>
               <Card.Header content={post.title} />
-              <Card.Meta content={formatDateTime(post.publishedAt)} />
+              <Card.Meta
+                content={`投稿日：${formatDateTime(post.publishedAt)}`}
+              />
               <Card.Description
                 content={post.summary ? post.summary : cutCont}
               />
