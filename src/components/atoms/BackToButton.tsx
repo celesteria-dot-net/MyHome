@@ -8,7 +8,7 @@ type Props = {
   ariaLabel: string;
   onClick?: () => void;
 };
-// TODO: Button.Groupを縦に並べ、Groupでbottom, right
+
 const BackTo: FC<Props> = ({
   icon,
   ariaLabel,
