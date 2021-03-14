@@ -11,10 +11,9 @@ import {
   Table,
 } from 'semantic-ui-react';
 
-import BackToTop from 'components/atoms/BackToTopButton';
 import ListAnchor from 'components/atoms/CustomAnchor';
 import Jumbotron from 'components/organisms/Jumbotron';
-import Title from 'components/molecules/CustomTitle';
+import Title from 'components/molecules/LargeTitle';
 import IconAnchor from 'components/atoms/IconAnchorButton';
 import MyIcon from 'components/atoms/MyIcon';
 import PageTitle from 'components/atoms/PageTitle';
@@ -114,8 +113,6 @@ const Top: FC = () => (
     </Container>
 
     <Footer isTop />
-
-    <BackToTop />
   </>
 );
 
