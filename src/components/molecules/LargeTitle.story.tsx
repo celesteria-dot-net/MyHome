@@ -2,13 +2,13 @@
 import React, { FC } from 'react';
 import { text } from '@storybook/addon-knobs';
 
-import CustomTitle from './CustomTitle';
+import LargeTitle from './LargeTitle';
 
-export default { title: 'Molecules/CustomTitle' };
+export default { title: 'Molecules/LargeTitle' };
 
-export const initial: FC = () => <CustomTitle mainTitle="Storybook" />;
+export const initial: FC = () => <LargeTitle mainTitle="Storybook" />;
 export const withTitles: FC = () => (
-  <CustomTitle
+  <LargeTitle
     mainTitle={text('main title', 'これはメインタイトルです')}
     subTitle={text('sub title', 'これはサブタイトルです')}
   />

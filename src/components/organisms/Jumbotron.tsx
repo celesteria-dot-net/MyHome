@@ -10,12 +10,12 @@ type Prop = {
 const Jumbotron: FC<Prop> = ({ children, backgroundImagePath }) => (
   <div
     css={css`
-      text-align: center;
       position: relative;
       min-height: 90vh;
+      text-align: center;
+      background-image: url(${backgroundImagePath});
       background-position: center;
       background-size: cover;
-      background-image: url(${backgroundImagePath});
     `}
   >
     <Container
