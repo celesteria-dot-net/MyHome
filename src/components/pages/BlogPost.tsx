@@ -12,7 +12,6 @@ const BlogPost: FC<{ post: Post }> = ({ post }) => (
     <PageTitle title={post.title} />
 
     <Container>
-      <Divider hidden />
       <Header as="h1" content={post.title} textAlign="center" />
       <Divider />
       <p>作成日：{formatDateOnly(post.publishedAt)}</p>
