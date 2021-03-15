@@ -5,6 +5,7 @@ import { Container, Divider, Header } from 'semantic-ui-react';
 import { Post } from 'domains/microCms';
 import PageTitle from 'components/atoms/PageTitle';
 import { formatDateOnly } from 'utils/date';
+import BlogPostIcons from 'components/organisms/BlogPostIcons';
 
 const BlogPost: FC<{ post: Post }> = ({ post }) => (
   <>
@@ -19,6 +20,8 @@ const BlogPost: FC<{ post: Post }> = ({ post }) => (
       <Divider hidden />
       <span dangerouslySetInnerHTML={{ __html: post.content }} />
     </Container>
+
+    <BlogPostIcons />
   </>
 );
 
