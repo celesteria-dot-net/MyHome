@@ -61,10 +61,6 @@ jobs:
             - build
 
   deploy:
-    parameters:
-      env:
-        type: enum
-        enum: ["dev", "prod"]
     executor:
       name: default
     steps:
@@ -78,7 +74,7 @@ jobs:
             npm install -g firebase-tools
       - run:
           name: Deploy to Firebase
-          command: ~/.npm-global/bin/firebase deploy --only hosting --project << parameters.env >> --token ${FIREBASE_TOKEN}
+          command: ~/.npm-global/bin/firebase deploy --only hosting --token ${FIREBASE_TOKEN}
 
 workflows:
   version: 2
@@ -96,21 +92,9 @@ workflows:
           filters:
             branches:
               only:
-                - develop
                 - main
       - deploy:
-          name: deploy_dev
-          env: dev
-          context: TOKENS
-          requires:
-            - format_and_lint
-            - build
-          filters:
-            branches:
-              only: develop
-      - deploy:
-          name: deploy_prod
-          env: prod
+          name: deploy
           context: TOKENS
           requires:
             - format_and_lint
