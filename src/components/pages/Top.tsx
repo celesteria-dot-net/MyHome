@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -11,6 +11,8 @@ import {
   Table,
 } from 'semantic-ui-react';
 
+import ErrorBoundary from 'ErrorBoundary';
+import PostList from 'containers/organisms/PostList';
 import ListAnchor from 'components/atoms/CustomAnchor';
 import Jumbotron from 'components/organisms/Jumbotron';
 import Title from 'components/molecules/LargeTitle';
@@ -19,6 +21,7 @@ import MyIcon from 'components/atoms/MyIcon';
 import PageTitle from 'components/atoms/PageTitle';
 import HomeIcons from 'components/organisms/HomeIcons';
 import Footer from 'components/organisms/Footer';
+import Spinner from 'components/molecules/Loading';
 
 import PageTitles from 'data/titles';
 import { favoriteVTubers, gameHistory } from 'data/introductionTableContent';
@@ -108,6 +111,11 @@ const Top: FC = () => (
 
       <Header as="h2" content="Posts" />
       <Divider />
+      <ErrorBoundary>
+        <Suspense fallback={<Spinner size="big" />}>
+          <PostList limit={3} />
+        </Suspense>
+      </ErrorBoundary>
 
       <Header as="h2" content="Apps" />
       <Divider />
