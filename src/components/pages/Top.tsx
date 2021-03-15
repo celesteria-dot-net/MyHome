@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -12,25 +11,22 @@ import {
   Table,
 } from 'semantic-ui-react';
 
-import BackToTop from 'components/atoms/BackToTopButton';
 import ListAnchor from 'components/atoms/CustomAnchor';
 import Jumbotron from 'components/organisms/Jumbotron';
-import Title from 'components/molecules/CustomTitle';
+import Title from 'components/molecules/LargeTitle';
 import IconAnchor from 'components/atoms/IconAnchorButton';
 import MyIcon from 'components/atoms/MyIcon';
-import {
-  favoriteVTubers,
-  gameHistory,
-} from 'components/data/introductionTableContent';
-import Footer from '../organisms/Footer';
+import PageTitle from 'components/atoms/PageTitle';
+import HomeIcons from 'components/organisms/HomeIcons';
+import Footer from 'components/organisms/Footer';
 
-import bgPicture from '../../pictures/background.jpg';
+import PageTitles from 'data/titles';
+import { favoriteVTubers, gameHistory } from 'data/introductionTableContent';
+import bgPicture from 'pictures/background.jpg';
 
 const Top: FC = () => (
   <>
-    <Helmet>
-      <title>Lucky&apos;s page</title>
-    </Helmet>
+    <PageTitle title={PageTitles.Top} />
 
     <Jumbotron backgroundImagePath={bgPicture}>
       <Segment vertical>
@@ -68,8 +64,13 @@ const Top: FC = () => (
                 <Table.Cell content="推しVTuber" textAlign="center" />
                 <Table.Cell>
                   <List bulleted>
-                    {favoriteVTubers.map((value) => (
-                      <ListAnchor content={value.content} url={value.url} />
+                    {favoriteVTubers.map((value, index) => (
+                      <ListAnchor
+                        // eslint-disable-next-line react/no-array-index-key
+                        key={`favoriteV-${index}`}
+                        content={value.content}
+                        url={value.url}
+                      />
                     ))}
                   </List>
                 </Table.Cell>
@@ -112,9 +113,9 @@ const Top: FC = () => (
       <Divider />
     </Container>
 
-    <Footer isTop />
+    <HomeIcons />
 
-    <BackToTop />
+    <Footer isTop />
   </>
 );
 

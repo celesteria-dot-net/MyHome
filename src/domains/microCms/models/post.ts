@@ -10,8 +10,6 @@ export type Post = {
 
 export type Thumbnail = {
   url: string;
-  height: number;
-  width: number;
 };
 
 const isPost = (arg: unknown): arg is Post => {
