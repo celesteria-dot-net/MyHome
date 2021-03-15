@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { FC } from 'react';
-import { useNavigate } from 'react-router';
-import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Card, Icon, Image } from 'semantic-ui-react';
 
 import { Post } from 'domains/microCms';
@@ -14,55 +13,39 @@ import { formatDateOnly } from 'utils/date';
  */
 const reg = /<("[^"]*"|'[^']*'|[^'">])*>/g;
 
-const PostList: FC<{ posts: Post[] }> = ({ posts }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
+  <Card.Group itemsPerRow={3}>
+    {posts.map((post) => {
+      const content = post.content.replace(reg, '');
+      const cutCont =
+        content.length < 100 ? content : content.slice(0, 99).concat('...');
 
-  return (
-    <Card.Group itemsPerRow={3}>
-      {posts.map((post) => {
-        const content = post.content.replace(reg, '');
-        const cutCont =
-          content.length < 100 ? content : content.slice(0, 99).concat('...');
-
-        return (
-          <Card
-            key={post.id}
-            onClick={() =>
-              navigate(
-                location.pathname.startsWith('/blog')
-                  ? post.id
-                  : `blog/${post.id}`,
-              )
-            }
-          >
-            {post.thumbnail ? (
-              <Image src={post.thumbnail.url} size="medium" centered />
-            ) : (
-              <Icon
-                name="align left"
-                size="massive"
-                color="black"
-                css={css`
-                  width: auto !important;
-                  margin: 15px 0 !important;
-                `}
-              />
-            )}
-            <Card.Content>
-              <Card.Header content={post.title} />
-              <Card.Meta
-                content={`投稿日：${formatDateOnly(post.publishedAt)}`}
-              />
-              <Card.Description
-                content={post.summary ? post.summary : cutCont}
-              />
-            </Card.Content>
-          </Card>
-        );
-      })}
-    </Card.Group>
-  );
-};
+      return (
+        <Card key={post.id} as={Link} to={`/blog/${post.id}`}>
+          {post.thumbnail ? (
+            <Image src={post.thumbnail.url} size="medium" centered />
+          ) : (
+            <Icon
+              name="align left"
+              size="massive"
+              color="black"
+              css={css`
+                width: auto !important;
+                margin: 15px 0 !important;
+              `}
+            />
+          )}
+          <Card.Content>
+            <Card.Header content={post.title} />
+            <Card.Meta
+              content={`投稿日：${formatDateOnly(post.publishedAt)}`}
+            />
+            <Card.Description content={post.summary ? post.summary : cutCont} />
+          </Card.Content>
+        </Card>
+      );
+    })}
+  </Card.Group>
+);
 
 export default PostList;
