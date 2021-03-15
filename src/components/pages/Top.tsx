@@ -1,4 +1,6 @@
-import React, { FC } from 'react';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import React, { FC, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -11,6 +13,8 @@ import {
   Table,
 } from 'semantic-ui-react';
 
+import ErrorBoundary from 'ErrorBoundary';
+import PostList from 'containers/organisms/PostList';
 import ListAnchor from 'components/atoms/CustomAnchor';
 import Jumbotron from 'components/organisms/Jumbotron';
 import Title from 'components/molecules/LargeTitle';
@@ -19,6 +23,7 @@ import MyIcon from 'components/atoms/MyIcon';
 import PageTitle from 'components/atoms/PageTitle';
 import HomeIcons from 'components/organisms/HomeIcons';
 import Footer from 'components/organisms/Footer';
+import Spinner from 'components/molecules/Loading';
 
 import PageTitles from 'data/titles';
 import { favoriteVTubers, gameHistory } from 'data/introductionTableContent';
@@ -35,9 +40,7 @@ const Top: FC = () => (
       <Segment vertical>
         <IconAnchor iconName="twitter" link="https://twitter.com/Lucky3028" />
         <IconAnchor iconName="github" link="https://github.com/Lucky3028" />
-        <Link to="blog">
-          <Button circular color="grey" icon="sticky note" />
-        </Link>
+        <Button circular color="grey" icon="sticky note" as={Link} to="blog" />
       </Segment>
     </Jumbotron>
     <Divider hidden />
@@ -108,6 +111,26 @@ const Top: FC = () => (
 
       <Header as="h2" content="Posts" />
       <Divider />
+      <ErrorBoundary>
+        <Suspense fallback={<Spinner size="big" />}>
+          <PostList limit={3} />
+        </Suspense>
+      </ErrorBoundary>
+      <Grid textAlign="right" columns={1}>
+        <Grid.Column>
+          <Button
+            basic
+            content="Read more"
+            icon="arrow right"
+            labelPosition="right"
+            as={Link}
+            to="blog"
+            css={css`
+              margin-top: 0.5rem !important;
+            `}
+          />
+        </Grid.Column>
+      </Grid>
 
       <Header as="h2" content="Apps" />
       <Divider />

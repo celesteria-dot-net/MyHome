@@ -5,13 +5,13 @@ import { Container, Divider, Header } from 'semantic-ui-react';
 import { Post } from 'domains/microCms';
 import PageTitle from 'components/atoms/PageTitle';
 import { formatDateOnly } from 'utils/date';
+import BlogPostIcons from 'components/organisms/BlogPostIcons';
 
 const BlogPost: FC<{ post: Post }> = ({ post }) => (
   <>
     <PageTitle title={post.title} />
 
     <Container>
-      <Divider hidden />
       <Header as="h1" content={post.title} textAlign="center" />
       <Divider />
       <p>作成日：{formatDateOnly(post.publishedAt)}</p>
@@ -19,6 +19,8 @@ const BlogPost: FC<{ post: Post }> = ({ post }) => (
       <Divider hidden />
       <span dangerouslySetInnerHTML={{ __html: post.content }} />
     </Container>
+
+    <BlogPostIcons />
   </>
 );
 
