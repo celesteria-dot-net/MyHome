@@ -4,8 +4,13 @@ import { useQuery } from 'react-query';
 import { fetchPosts } from 'domains/microCms';
 import PostList from 'components/organisms/PostList';
 
-const EnhancedPostList: FC = () => {
+type Props = {
+  limit?: number;
+};
+
+const EnhancedPostList: FC<Props> = ({ limit }) => {
   const { data = [] } = useQuery('allPosts', () => fetchPosts());
+  if (limit) return <PostList posts={data.slice(0, limit)} />;
 
   return <PostList posts={data} />;
 };
