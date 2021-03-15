@@ -1,6 +1,5 @@
 {
   "projects": {
-    "prod": "celesteria-net",
-    "dev": "dev-celesteria-net"
+    "default":  "celesteria-net"
   }
 }
