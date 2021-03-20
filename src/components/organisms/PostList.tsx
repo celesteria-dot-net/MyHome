@@ -1,11 +1,11 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 
 import { Post } from 'domains/microCms';
 import { formatDateOnly } from 'utils/date';
+
+import bgPicture from 'pictures/background.jpg';
 
 /**
  * HTMLタグを取り除く正規表現
@@ -14,7 +14,7 @@ import { formatDateOnly } from 'utils/date';
 const reg = /<("[^"]*"|'[^']*'|[^'">])*>/g;
 
 const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
-  <Card.Group itemsPerRow={3}>
+  <Card.Group itemsPerRow={3} stackable>
     {posts.map((post) => {
       const content = post.content.replace(reg, '');
       const cutCont =
@@ -22,19 +22,7 @@ const PostList: FC<{ posts: Post[] }> = ({ posts }) => (
 
       return (
         <Card key={post.id} as={Link} to={`/blog/${post.id}`}>
-          {post.thumbnail ? (
-            <Image src={post.thumbnail.url} size="medium" centered />
-          ) : (
-            <Icon
-              name="align left"
-              size="massive"
-              color="black"
-              css={css`
-                width: auto !important;
-                margin: 15px 0 !important;
-              `}
-            />
-          )}
+          <Image src={post.thumbnail ? post.thumbnail.url : bgPicture} fluid />
           <Card.Content>
             <Card.Header content={post.title} />
             <Card.Meta
