@@ -68,13 +68,8 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Install firebase-tools
-          command: |
-            npm config set prefix '~/.npm-global/'
-            npm install -g firebase-tools
-      - run:
           name: Deploy to Firebase
-          command: ~/.npm-global/bin/firebase deploy --only hosting --token ${FIREBASE_TOKEN}
+          command: npx firebase deploy --only hosting --token ${FIREBASE_TOKEN}
 
 workflows:
   version: 2
